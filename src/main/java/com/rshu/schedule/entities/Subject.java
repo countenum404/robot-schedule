@@ -1,27 +1,22 @@
 package com.rshu.schedule.entities;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Collection;
-
-@Entity
 @NoArgsConstructor
-public class StudyGroup {
-
+@Entity
+public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Getter
     @Setter
-    private String name;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "group")
-    private Collection<Student> students;
+    private String subjectName;
 }
