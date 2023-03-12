@@ -6,6 +6,7 @@ import com.rshu.schedule.repos.StudentRepository;
 import com.rshu.schedule.services.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +19,12 @@ public class StudentController {
     @Autowired
     private StudentsService studentsService;
 
-    @GetMapping
-    public ResponseEntity<?> hello(){
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getStudents(){
         return new ResponseEntity<Collection<Student>>(studentsService.getStudents(), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addStudent(@RequestParam(required = true) String firstName,
                                         @RequestParam(required = true) String secondName,
                                         @RequestParam(required = false) String surname){
