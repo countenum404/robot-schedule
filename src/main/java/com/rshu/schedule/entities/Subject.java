@@ -19,4 +19,11 @@ public class Subject {
     @Getter
     @Setter
     private String subjectName;
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "subjectName='" + subjectName + '\'' +
+                '}';
+    }
 }
