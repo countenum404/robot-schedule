@@ -30,4 +30,13 @@ public class Teacher {
     @Setter
     private String surname;
 
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
 }

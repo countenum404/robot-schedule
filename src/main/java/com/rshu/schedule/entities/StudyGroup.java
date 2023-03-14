@@ -24,4 +24,11 @@ public class StudyGroup {
     @Setter
     @OneToMany(mappedBy = "group")
     private Collection<Student> students;
+
+    @Override
+    public String toString() {
+        return "StudyGroup{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

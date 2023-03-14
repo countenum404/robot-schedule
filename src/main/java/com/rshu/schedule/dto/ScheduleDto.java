@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,13 +17,22 @@ public class ScheduleDto {
 
     @Getter
     @Setter
-    Teacher teacher;
+    Collection<Teacher> teacher;
 
     @Getter
     @Setter
-    StudyGroup group;
+    Collection<StudyGroup> group;
 
     @Getter
     @Setter
-    Subject subject;
+    Collection<Subject> subject;
+
+    @Override
+    public String toString() {
+        return "ScheduleDto{" +
+                "teacher=" + (teacher.toArray())[0].toString() +
+                ", group=" + (group.toArray())[0].toString() +
+                ", subject=" + (subject.toArray())[0].toString() +
+                '}';
+    }
 }
