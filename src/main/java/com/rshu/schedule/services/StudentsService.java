@@ -33,11 +33,6 @@ public class StudentsService {
         return groupRepository.findAll();
     }
 
-    public boolean createStudent(Student student){
-        studentRepository.save(student);
-        return true;
-    }
-
     public boolean createGroup(String groupName){
         StudyGroup studyGroup = new StudyGroup();
         studyGroup.setName(groupName);
@@ -50,6 +45,12 @@ public class StudentsService {
         StudyGroup group = groupRepository.findByName(student.getGroup().getName());
         existingStudent.setGroup(group);
         studentRepository.save(existingStudent);
+        return true;
+    }
+
+    public boolean deleteStudent(Student student){
+        studentRepository.delete(student);
+
         return true;
     }
 
