@@ -2,6 +2,7 @@ package com.rshu.schedule.services;
 
 import com.rshu.schedule.entities.Student;
 import com.rshu.schedule.entities.StudyGroup;
+import com.rshu.schedule.exceptions.StudentNotFoundException;
 import com.rshu.schedule.repos.GroupRepository;
 import com.rshu.schedule.repos.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +53,11 @@ public class StudentsService {
         return true;
     }
 
+    public Student findStudent(String firstname, String lastname, String surname) throws StudentNotFoundException {
+        Student student = studentRepository.findStudent(firstname, lastname, surname);
+        if (student == null){
+            throw new StudentNotFoundException("");
+        }
+        return studentRepository.findStudent(firstname, lastname, surname);
+    }
 }
