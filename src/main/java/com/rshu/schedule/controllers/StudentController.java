@@ -3,6 +3,7 @@ package com.rshu.schedule.controllers;
 
 import com.rshu.schedule.entities.Student;
 import com.rshu.schedule.exceptions.EntityNotFoundException;
+import com.rshu.schedule.exceptions.StudentNotFoundException;
 import com.rshu.schedule.services.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,13 +42,13 @@ public class StudentController {
         return new ResponseEntity<Boolean>(studentsService.createStudent(firstname, lastname, surname), HttpStatus.CREATED);
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity changeStudent(){
-        return null;
-    }
-
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteStudent(@RequestBody Student student){
-        return new ResponseEntity<Boolean>(studentsService.deleteStudent(student), HttpStatus.OK);
+        try {
+            return new ResponseEntity<Boolean>(studentsService.deleteStudent(student), HttpStatus.OK);
+        }
+        catch (EntityNotFoundException ex){
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 }

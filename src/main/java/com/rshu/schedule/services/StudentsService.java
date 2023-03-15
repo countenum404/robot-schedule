@@ -48,9 +48,9 @@ public class StudentsService {
         return true;
     }
 
-    public boolean deleteStudent(Student student){
-        studentRepository.delete(student);
-
+    public boolean deleteStudent(Student student) throws StudentNotFoundException {
+        Student foundStudent = this.findStudent(student.getFirstname(), student.getLastname(), student.getSurname());
+        studentRepository.delete(foundStudent);
         return true;
     }
 
