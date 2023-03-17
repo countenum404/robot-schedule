@@ -1,4 +1,4 @@
-package com.rshu.schedule.controllers;
+package com.rshu.schedule.api.controllers;
 
 
 import com.rshu.schedule.dto.ScheduleDto;
