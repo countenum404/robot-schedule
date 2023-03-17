@@ -1,8 +1,11 @@
 package com.rshu.schedule.services;
 
+import com.rshu.schedule.dto.GroupStudentDto;
 import com.rshu.schedule.entities.Student;
 import com.rshu.schedule.entities.StudyGroup;
+import com.rshu.schedule.exceptions.EntityNotFoundException;
 import com.rshu.schedule.exceptions.StudentNotFoundException;
+import com.rshu.schedule.exceptions.StudyGroupNotFoundException;
 import com.rshu.schedule.repos.GroupRepository;
 import com.rshu.schedule.repos.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-public class StudentsService {
+public class StudentsAndGroupService {
 
     @Autowired
     private StudentRepository studentRepository;
@@ -40,15 +43,19 @@ public class StudentsService {
         return true;
     }
 
-    public boolean mapStudentAndGroup(Student student){
-        Student existingStudent = studentRepository.findStudentByfirstname(student.getFirstname());
-        StudyGroup group = groupRepository.findByName(student.getGroup().getName());
+    public boolean mapStudentAndGroup(GroupStudentDto studentDto) throws EntityNotFoundException {
+        Student student = studentDto.getStudent();
+        Student existingStudent = findStudent(student.getFirstname(), student.getLastname(), student.getSurname());
+        StudyGroup group = groupRepository.findByName(studentDto.getGroup());
+        if (group == null){
+            throw new StudyGroupNotFoundException("");
+        }
         existingStudent.setGroup(group);
         studentRepository.save(existingStudent);
         return true;
     }
 
-    public boolean deleteStudent(Student student) throws StudentNotFoundException {
+    public boolean deleteStudent(Student student) throws EntityNotFoundException  {
         Student foundStudent = this.findStudent(student.getFirstname(), student.getLastname(), student.getSurname());
         studentRepository.delete(foundStudent);
         return true;

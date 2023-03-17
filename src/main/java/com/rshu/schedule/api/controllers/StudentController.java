@@ -1,10 +1,9 @@
-package com.rshu.schedule.controllers;
+package com.rshu.schedule.api.controllers;
 
 
 import com.rshu.schedule.entities.Student;
 import com.rshu.schedule.exceptions.EntityNotFoundException;
-import com.rshu.schedule.exceptions.StudentNotFoundException;
-import com.rshu.schedule.services.StudentsService;
+import com.rshu.schedule.services.StudentsAndGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +17,7 @@ import java.util.Collection;
 public class StudentController {
 
     @Autowired
-    private StudentsService studentsService;
+    private StudentsAndGroupService studentsService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getStudents(@RequestParam(required = false) String firstname,
@@ -29,6 +28,7 @@ public class StudentController {
         }
         try {
             Student student = studentsService.findStudent(firstname, lastname, surname);
+            System.out.println(student);
             return new ResponseEntity<Student>(student, HttpStatus.OK);
         } catch (EntityNotFoundException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());

@@ -1,5 +1,6 @@
 package com.rshu.schedule.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ public class Student {
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
 
     @Getter
@@ -32,6 +34,7 @@ public class Student {
     @Setter
     @ManyToOne
     @JoinColumn(name = "study_group_id")
+    @JsonIgnore
     private StudyGroup group;
 
     public Student(String firstname, String lastname, String surname) {
