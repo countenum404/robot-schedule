@@ -23,7 +23,7 @@ public class StudyGroup {
     @Getter
     @Setter
     @OneToMany(mappedBy = "group")
-    private Collection<Student> students;
+    private Collection<User> users;
 
     @Override
     public String toString() {

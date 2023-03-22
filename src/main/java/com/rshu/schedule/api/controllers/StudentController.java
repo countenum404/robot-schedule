@@ -1,7 +1,7 @@
 package com.rshu.schedule.api.controllers;
 
 
-import com.rshu.schedule.entities.Student;
+import com.rshu.schedule.entities.User;
 import com.rshu.schedule.exceptions.EntityNotFoundException;
 import com.rshu.schedule.services.StudentsAndGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,12 @@ public class StudentController {
                                          @RequestParam(required = false) String lastname,
                                          @RequestParam(required = false) String surname){
         if (firstname == null && lastname == null){
-            return new ResponseEntity<Collection<Student>>(studentsService.getStudents(), HttpStatus.OK);
+            return new ResponseEntity<Collection<User>>(studentsService.getStudents(), HttpStatus.OK);
         }
         try {
-            Student student = studentsService.findStudent(firstname, lastname, surname);
-            System.out.println(student);
-            return new ResponseEntity<Student>(student, HttpStatus.OK);
+            User user = studentsService.findStudent(firstname, lastname, surname);
+            System.out.println(user);
+            return new ResponseEntity<User>(user, HttpStatus.OK);
         } catch (EntityNotFoundException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -43,9 +43,9 @@ public class StudentController {
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteStudent(@RequestBody Student student){
+    public ResponseEntity deleteStudent(@RequestBody User user){
         try {
-            return new ResponseEntity<Boolean>(studentsService.deleteStudent(student), HttpStatus.OK);
+            return new ResponseEntity<Boolean>(studentsService.deleteStudent(user), HttpStatus.OK);
         }
         catch (EntityNotFoundException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());

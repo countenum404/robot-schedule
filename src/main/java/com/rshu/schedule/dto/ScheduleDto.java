@@ -2,7 +2,7 @@ package com.rshu.schedule.dto;
 
 import com.rshu.schedule.entities.StudyGroup;
 import com.rshu.schedule.entities.Subject;
-import com.rshu.schedule.entities.Teacher;
+import com.rshu.schedule.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ public class ScheduleDto {
 
     @Getter
     @Setter
-    Collection<Teacher> teacher;
+    Collection<User> teacher;
 
     @Getter
     @Setter

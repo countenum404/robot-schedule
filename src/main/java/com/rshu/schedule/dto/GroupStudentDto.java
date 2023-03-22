@@ -1,7 +1,6 @@
 package com.rshu.schedule.dto;
 
-import com.rshu.schedule.entities.Student;
-import com.rshu.schedule.entities.StudyGroup;
+import com.rshu.schedule.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,6 @@ public class GroupStudentDto {
     private String group;
     @Getter
     @Setter
-    private Student student;
+    private User user;
 
 }

@@ -35,5 +35,5 @@ public class ScheduleRecord {
     @ManyToMany
     @JoinColumn(name = "schedule_teacher")
     @NonNull
-    private Collection<Teacher> teachers;
+    private Collection<User> teachers;
 }
