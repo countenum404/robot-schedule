@@ -1,13 +1,13 @@
 package com.rshu.schedule.services;
 
 import com.rshu.schedule.dto.GroupStudentDto;
-import com.rshu.schedule.entities.Student;
+import com.rshu.schedule.entities.User;
 import com.rshu.schedule.entities.StudyGroup;
 import com.rshu.schedule.exceptions.EntityNotFoundException;
 import com.rshu.schedule.exceptions.StudentNotFoundException;
 import com.rshu.schedule.exceptions.StudyGroupNotFoundException;
 import com.rshu.schedule.repos.GroupRepository;
-import com.rshu.schedule.repos.StudentRepository;
+import com.rshu.schedule.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +17,19 @@ import java.util.Collection;
 public class StudentsAndGroupService {
 
     @Autowired
-    private StudentRepository studentRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private GroupRepository groupRepository;
 
     public boolean createStudent(String firstName, String secondName, String surname){
-        Student student = new Student(firstName, secondName, surname);
-        studentRepository.save(student);
+        User user = new User(firstName, secondName, surname);
+        userRepository.save(user);
         return true;
     }
 
-    public Collection<Student> getStudents(){
-        return studentRepository.findAll();
+    public Collection<User> getStudents(){
+        return userRepository.findAll();
     }
 
     public Collection<StudyGroup> getGroups(){
@@ -44,28 +44,28 @@ public class StudentsAndGroupService {
     }
 
     public boolean mapStudentAndGroup(GroupStudentDto studentDto) throws EntityNotFoundException {
-        Student student = studentDto.getStudent();
-        Student existingStudent = findStudent(student.getFirstname(), student.getLastname(), student.getSurname());
+        User user = studentDto.getUser();
+        User existingUser = findStudent(user.getFirstname(), user.getLastname(), user.getSurname());
         StudyGroup group = groupRepository.findByName(studentDto.getGroup());
         if (group == null){
             throw new StudyGroupNotFoundException("");
         }
-        existingStudent.setGroup(group);
-        studentRepository.save(existingStudent);
+        existingUser.setGroup(group);
+        userRepository.save(existingUser);
         return true;
     }
 
-    public boolean deleteStudent(Student student) throws EntityNotFoundException  {
-        Student foundStudent = this.findStudent(student.getFirstname(), student.getLastname(), student.getSurname());
-        studentRepository.delete(foundStudent);
+    public boolean deleteStudent(User user) throws EntityNotFoundException  {
+        User foundUser = this.findStudent(user.getFirstname(), user.getLastname(), user.getSurname());
+        userRepository.delete(foundUser);
         return true;
     }
 
-    public Student findStudent(String firstname, String lastname, String surname) throws StudentNotFoundException {
-        Student student = studentRepository.findStudent(firstname, lastname, surname);
-        if (student == null){
+    public User findStudent(String firstname, String lastname, String surname) throws StudentNotFoundException {
+        User user = userRepository.findStudent(firstname, lastname, surname);
+        if (user == null){
             throw new StudentNotFoundException("");
         }
-        return studentRepository.findStudent(firstname, lastname, surname);
+        return userRepository.findStudent(firstname, lastname, surname);
     }
 }
