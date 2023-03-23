@@ -1,6 +1,6 @@
 package com.rshu.schedule.config;
 
-import com.rshu.schedule.repos.UserRepository;
+import com.rshu.schedule.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
