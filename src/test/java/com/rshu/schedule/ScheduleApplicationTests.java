@@ -1,8 +1,8 @@
 package com.rshu.schedule;
 
-import com.rshu.schedule.api.controllers.GroupController;
-import com.rshu.schedule.api.controllers.ScheduleController;
-import com.rshu.schedule.api.controllers.StudentController;
+import com.rshu.schedule.study.group.GroupController;
+import com.rshu.schedule.schedule.ScheduleController;
+import com.rshu.schedule.user.StudentController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
