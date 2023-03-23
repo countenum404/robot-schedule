@@ -1,13 +1,13 @@
 package com.rshu.schedule.services;
 
-import com.rshu.schedule.dto.GroupStudentDto;
-import com.rshu.schedule.entities.User;
-import com.rshu.schedule.entities.StudyGroup;
+import com.rshu.schedule.study.group.GroupStudentDto;
+import com.rshu.schedule.user.User;
+import com.rshu.schedule.study.group.StudyGroup;
 import com.rshu.schedule.exceptions.EntityNotFoundException;
-import com.rshu.schedule.exceptions.StudentNotFoundException;
-import com.rshu.schedule.exceptions.StudyGroupNotFoundException;
-import com.rshu.schedule.repos.GroupRepository;
-import com.rshu.schedule.repos.UserRepository;
+import com.rshu.schedule.user.StudentNotFoundException;
+import com.rshu.schedule.study.group.StudyGroupNotFoundException;
+import com.rshu.schedule.study.group.GroupRepository;
+import com.rshu.schedule.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
