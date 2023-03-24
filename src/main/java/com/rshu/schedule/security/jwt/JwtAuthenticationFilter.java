@@ -12,18 +12,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthentificationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
+    private static List<String> skipFilterUrls = List.of("/db/*");
     private final TokenRepository tokenRepository;
 
     @Override
@@ -61,4 +65,11 @@ public class JwtAuthentificationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        return skipFilterUrls.stream().anyMatch(url -> new AntPathRequestMatcher(url).matches(request));
+    }
+
+
 }
