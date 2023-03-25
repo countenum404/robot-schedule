@@ -34,7 +34,7 @@ public class SecurityConfig {
                     .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
                         .anyRequest()
-                        .authenticated()
+                        .permitAll()
                 .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
