@@ -1,6 +1,7 @@
 package com.rshu.schedule.security.jwt;
 
 import com.rshu.schedule.security.token.TokenRepository;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,12 +40,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         jwt = authorizationHeader.substring(7);
-        userLogin = jwtService.getLogin(jwt);
+        try {
+            userLogin = jwtService.getLogin(jwt);
+        } catch (ExpiredJwtException jwtException) {
+            filterService.handleExpiredAuthToken(response);
+            return;
+        }
         if (userLogin != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userLogin);
             var isTokenValid = tokenRepository.findByToken(jwt)
                     .map(t -> !t.isExpired() && !t.isRevoked())
                     .orElse(false);
+            if (!isTokenValid) {
+                filterService.handleExpiredAuthToken(response);
+                return;
+            }
             if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
