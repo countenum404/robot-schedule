@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -41,6 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authorizationHeader = request.getHeader("Authorization");
         final String jwt;
         final String userLogin;
+        final UserDetails userDetails;
         // check for an auth header and bearer token
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
             filterService.handleMissedAuthToken(response);
@@ -61,7 +63,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         if (userLogin != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userLogin);
+            try {
+                userDetails = this.userDetailsService.loadUserByUsername(userLogin);
+            } catch (UsernameNotFoundException exception) {
+                filterService.handleUsernameNotFoundException(response);
+                return;
+            }
             var isTokenValid = tokenRepository.findByToken(jwt)
                     .map(t -> !t.isRevoked())
                     .orElse(false);

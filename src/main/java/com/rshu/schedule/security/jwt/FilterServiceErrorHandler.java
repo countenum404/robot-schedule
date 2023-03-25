@@ -33,4 +33,8 @@ public class FilterServiceErrorHandler {
         response.getWriter().write(objectMapper.writeValueAsString("Bad auth token"));
     }
 
+    public void handleUsernameNotFoundException(HttpServletResponse response) throws IOException {
+        setResponseContent(response);
+        response.getWriter().write(objectMapper.writeValueAsString("Credentials is not found"));
+    }
 }

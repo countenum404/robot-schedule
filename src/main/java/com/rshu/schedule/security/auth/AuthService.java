@@ -31,6 +31,7 @@ public class AuthService {
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
+                .surname(request.getSurname())
                 .login(request.getLogin())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.STUDENT)
