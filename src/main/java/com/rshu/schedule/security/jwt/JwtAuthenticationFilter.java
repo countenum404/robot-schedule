@@ -19,11 +19,10 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthentificationFilter extends OncePerRequestFilter {
-
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private final FilterServiceErrorHandler filterService;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
-
     private final TokenRepository tokenRepository;
 
     @Override
@@ -36,13 +35,12 @@ public class JwtAuthentificationFilter extends OncePerRequestFilter {
         final String jwt;
         final String userLogin;
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
-            filterChain.doFilter(request, response);
+            filterService.handleMissedAuthToken(response);
             return;
         }
         jwt = authorizationHeader.substring(7);
-        System.out.println(jwt);
         userLogin = jwtService.getLogin(jwt);
-        if(userLogin != null && SecurityContextHolder.getContext().getAuthentication() == null){
+        if (userLogin != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userLogin);
             var isTokenValid = tokenRepository.findByToken(jwt)
                     .map(t -> !t.isExpired() && !t.isRevoked())
