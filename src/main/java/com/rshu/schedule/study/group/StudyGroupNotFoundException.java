@@ -7,4 +7,7 @@ public class StudyGroupNotFoundException extends EntityNotFoundException {
     public StudyGroupNotFoundException(String message) {
         super(Entities.STUDY_GROUP.name());
     }
+
+    public StudyGroupNotFoundException(StudyGroup studyGroup) {
+    }
 }

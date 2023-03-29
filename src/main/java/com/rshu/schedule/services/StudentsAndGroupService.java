@@ -8,19 +8,22 @@ import com.rshu.schedule.user.StudentNotFoundException;
 import com.rshu.schedule.study.group.StudyGroupNotFoundException;
 import com.rshu.schedule.study.group.GroupRepository;
 import com.rshu.schedule.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class StudentsAndGroupService {
+    private final UserDetailsService userDetailsService;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private GroupRepository groupRepository;
+    private final GroupRepository groupRepository;
 
     public boolean createStudent(String firstName, String secondName, String surname){
         User user = new User(firstName, secondName, surname);
@@ -44,13 +47,16 @@ public class StudentsAndGroupService {
     }
 
     public boolean mapStudentAndGroup(GroupStudentDto studentDto) throws EntityNotFoundException {
-        User user = studentDto.getUser();
-        User existingUser = findStudent(user.getFirstname(), user.getLastname(), user.getSurname());
-        StudyGroup group = groupRepository.findByName(studentDto.getGroup());
-        if (group == null){
+        User existingUser = this.userRepository.findStudent(
+                studentDto.getFirstname(),
+                studentDto.getLastname(),
+                studentDto.getLogin()
+        );
+        var group = groupRepository.findByName(studentDto.getGroup());
+        if (group.isEmpty()){
             throw new StudyGroupNotFoundException("");
         }
-        existingUser.setGroup(group);
+        existingUser.setGroup(group.get());
         userRepository.save(existingUser);
         return true;
     }
@@ -63,9 +69,17 @@ public class StudentsAndGroupService {
 
     public User findStudent(String firstname, String lastname, String surname) throws StudentNotFoundException {
         User user = userRepository.findStudent(firstname, lastname, surname);
-        if (user == null){
+        if (user == null) {
             throw new StudentNotFoundException("");
         }
         return userRepository.findStudent(firstname, lastname, surname);
+    }
+
+    public StudyGroup findGroup(String name) {
+        StudyGroup group = groupRepository.findByName(name).orElseThrow(() -> {
+            new StudyGroupNotFoundException("");
+            return null;
+        });
+        return group;
     }
 }
