@@ -25,8 +25,12 @@ public class User implements UserDetails {
     private Long id;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column(name = "Firstname")
     private String firstname;
+    @Column(name = "Lastname")
     private String lastname;
+
+    @Column(name = "Surname")
     private String surname;
     @Column(name="login", unique=true)
     private String login;

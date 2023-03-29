@@ -7,36 +7,34 @@ import com.rshu.schedule.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Collection;
-
+@Entity
+@Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Entity
+@AllArgsConstructor
+@Builder
 public class ScheduleRecord {
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Getter
-    @Setter
     @ManyToMany
     @JoinColumn(name = "schedule_subjects")
     @NonNull
-    private Collection<Subject> subjects;
+    private Subject subject;
 
-    @Getter
-    @Setter
     @ManyToMany
     @JoinColumn(name = "schedule_group")
     @NonNull
-    private Collection<StudyGroup> studyGroup;
+    private StudyGroup studyGroup;
 
-    @Getter
-    @Setter
+
     @ManyToMany
     @JoinColumn(name = "schedule_teacher")
     @NonNull
-    private Collection<User> teachers;
+    private User teacher;
 }
+
+
+
+

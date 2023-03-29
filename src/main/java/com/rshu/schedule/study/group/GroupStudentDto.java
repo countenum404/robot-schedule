@@ -1,19 +1,14 @@
 package com.rshu.schedule.study.group;
 
 import com.rshu.schedule.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class GroupStudentDto {
-    @Getter
-    @Setter
+    private String login;
+    private String firstname;
+    private String lastname;
     private String group;
-    @Getter
-    @Setter
-    private User user;
-
 }
