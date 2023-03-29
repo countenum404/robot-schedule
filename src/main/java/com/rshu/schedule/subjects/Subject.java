@@ -16,12 +16,12 @@ public class Subject {
     private Long id;
 
     @Column(name = "Name")
-    private String subjectName;
+    private String name;
 
     @Override
     public String toString() {
         return "Subject{" +
-                "subjectName='" + subjectName + '\'' +
+                "subjectName='" + name + '\'' +
                 '}';
     }
 }

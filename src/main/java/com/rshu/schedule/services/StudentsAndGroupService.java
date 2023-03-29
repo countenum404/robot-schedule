@@ -1,6 +1,7 @@
 package com.rshu.schedule.services;
 
 import com.rshu.schedule.study.group.GroupStudentDto;
+import com.rshu.schedule.user.Role;
 import com.rshu.schedule.user.User;
 import com.rshu.schedule.study.group.StudyGroup;
 import com.rshu.schedule.exceptions.EntityNotFoundException;
@@ -47,10 +48,11 @@ public class StudentsAndGroupService {
     }
 
     public boolean mapStudentAndGroup(GroupStudentDto studentDto) throws EntityNotFoundException {
-        User existingUser = this.userRepository.findStudent(
+        User existingUser = this.userRepository.findUser(
                 studentDto.getFirstname(),
                 studentDto.getLastname(),
-                studentDto.getLogin()
+                studentDto.getLogin(),
+                Role.STUDENT
         );
         var group = groupRepository.findByName(studentDto.getGroup());
         if (group.isEmpty()){
@@ -68,11 +70,11 @@ public class StudentsAndGroupService {
     }
 
     public User findStudent(String firstname, String lastname, String surname) throws StudentNotFoundException {
-        User user = userRepository.findStudent(firstname, lastname, surname);
+        User user = userRepository.findUser(firstname, lastname, surname, Role.STUDENT);
         if (user == null) {
             throw new StudentNotFoundException("");
         }
-        return userRepository.findStudent(firstname, lastname, surname);
+        return userRepository.findUser(firstname, lastname, surname, Role.STUDENT);
     }
 
     public StudyGroup findGroup(String name) {

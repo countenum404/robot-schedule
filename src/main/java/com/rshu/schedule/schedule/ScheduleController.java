@@ -18,7 +18,7 @@ public class ScheduleController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getFullSchedule(){
-        return new ResponseEntity<List<ScheduleRecord>>(scheduleService.allRecords(), HttpStatus.OK);
+        return new ResponseEntity<List<ScheduleDto>>(scheduleService.allRecords(), HttpStatus.OK);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)

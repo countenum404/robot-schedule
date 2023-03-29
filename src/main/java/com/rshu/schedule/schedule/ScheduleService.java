@@ -9,7 +9,11 @@ import com.rshu.schedule.user.TeacherDTO;
 import com.rshu.schedule.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,8 +24,25 @@ public class ScheduleService {
 
     private final SubjectService subjectService;
 
-    public List<ScheduleRecord> allRecords() {
-        return scheduleRepo.findAll();
+    public List<ScheduleDto> allRecords() {
+        return scheduleRepo.findAll()
+                .stream()
+                .map(
+                        scheduleRecord -> {
+                            User u = scheduleRecord.getTeacher().get(0);
+                            return ScheduleDto
+                                    .builder()
+                                    .teacher(TeacherDTO.builder()
+                                            .firstname(u.getFirstname())
+                                            .lastname(u.getLastname())
+                                            .surname(u.getSurname())
+                                            .build())
+                                    .group(scheduleRecord.getStudyGroup().get(0).getName())
+                                    .subject(scheduleRecord.getSubject().get(0).getName())
+                                    .build();
+                        }
+                )
+                .collect(Collectors.toList());
     }
 
     public Boolean createScheduleRecord(ScheduleDto schedule) {
@@ -36,9 +57,9 @@ public class ScheduleService {
             Subject subject = subjectService.findSubject(schedule.getSubject());
             ScheduleRecord record = ScheduleRecord
                     .builder()
-                    .subject(subject)
-                    .teacher(teacher)
-                    .studyGroup(group)
+                    .subject(Arrays.asList(subject))
+                    .teacher(Arrays.asList(teacher))
+                    .studyGroup(Arrays.asList(group))
                     .build();
             scheduleRepo.save(record);
         } catch (Exception e) {

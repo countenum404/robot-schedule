@@ -7,6 +7,9 @@ import com.rshu.schedule.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Collection;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -21,18 +24,18 @@ public class ScheduleRecord {
     @ManyToMany
     @JoinColumn(name = "schedule_subjects")
     @NonNull
-    private Subject subject;
+    private List<Subject> subject;
 
     @ManyToMany
     @JoinColumn(name = "schedule_group")
     @NonNull
-    private StudyGroup studyGroup;
+    private List<StudyGroup> studyGroup;
 
 
     @ManyToMany
     @JoinColumn(name = "schedule_teacher")
     @NonNull
-    private User teacher;
+    private List<User> teacher;
 }
 
 

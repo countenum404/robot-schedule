@@ -10,8 +10,9 @@ import java.util.Collection;
 
 
 @Data
+@Builder
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ScheduleDto {
     TeacherDTO teacher;
     String group;
