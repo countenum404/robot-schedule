@@ -7,14 +7,15 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 import jakarta.persistence.criteria.Predicate;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.util.AntPathMatcher;
 
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 
@@ -22,6 +23,21 @@ import java.util.function.Function;
 public class JwtService {
 
     private static final String SECRET_SIGNING_KEY = "294A404E635266556A586E327235753778214125442A472D4B6150645367566B";
+
+    public Optional<String> getJwtFromRequest(HttpServletRequest request) {
+        if (new AntPathMatcher().match("/admin/panel/**", request.getRequestURI())) {
+           return Optional.ofNullable(
+                   Arrays.stream(request.getCookies())
+                           .filter(cookie -> cookie.getName().equals("tok"))
+                           .findFirst()
+                           .get()
+                           .getValue()
+           );
+        } else if (new AntPathMatcher().match("/api/**", request.getRequestURI())){
+            return Optional.of(request.getHeader("Authorization").substring(7).trim());
+        }
+        return Optional.empty();
+    }
 
     public String getLogin(String token) {
         return getClaim(token, Claims::getSubject);

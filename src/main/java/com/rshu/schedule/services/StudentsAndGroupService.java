@@ -41,9 +41,7 @@ public class StudentsAndGroupService {
     }
 
     public boolean createGroup(String groupName){
-        StudyGroup studyGroup = new StudyGroup();
-        studyGroup.setName(groupName);
-        groupRepository.save(studyGroup);
+        groupRepository.save(StudyGroup.builder().name(groupName).build());
         return true;
     }
 

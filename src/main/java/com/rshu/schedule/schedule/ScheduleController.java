@@ -23,11 +23,7 @@ public class ScheduleController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addSchedule(@RequestBody ScheduleDto scheduleRecord){
-        System.out.println(scheduleRecord);
-
-        //ScheduleRecord record = new ScheduleRecord(scheduleRecord.getSubject(), scheduleRecord.getGroup(), scheduleRecord.getTeacher());
-        //scheduleRepo.save(record);
-        return new ResponseEntity<Boolean>(true,HttpStatus.CREATED);
+        return new ResponseEntity<Boolean>(scheduleService.createScheduleRecord(scheduleRecord),HttpStatus.CREATED);
     }
 
 }

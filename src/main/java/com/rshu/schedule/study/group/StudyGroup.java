@@ -3,25 +3,29 @@ package com.rshu.schedule.study.group;
 
 import com.rshu.schedule.user.User;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class StudyGroup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @SequenceGenerator(name = "gr_gen",
+            sequenceName = "group_generator",
+            initialValue = 4, allocationSize = 20
+            )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gr_gen")
+    private long id;
     private String name;
 
     @OneToMany(mappedBy = "group")
-    private Collection<User> users;
+    private List<User> users;
 
     @Override
     public String toString() {

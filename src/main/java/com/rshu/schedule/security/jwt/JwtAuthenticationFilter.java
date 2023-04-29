@@ -3,7 +3,6 @@ package com.rshu.schedule.security.jwt;
 import com.rshu.schedule.security.token.TokenRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
-import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,7 +27,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final FilterServiceErrorHandler filterService;
+    private final FilterServiceErrorHandler filterServiceErrorHandler;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
     private final TokenRepository tokenRepository;
@@ -39,26 +38,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
-        final String authorizationHeader = request.getHeader("Authorization");
         final String jwt;
         final String userLogin;
         final UserDetails userDetails;
-        // check for an auth header and bearer token
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
-            filterService.handleMissedAuthToken(response);
+
+        jwt = jwtService.getJwtFromRequest(request).orElse("");
+        if (jwt.isBlank() || jwt.isEmpty()) {
+            filterServiceErrorHandler.handleMissedAuthToken(response);
             return;
         }
-        // if prev is ok, then take a jwt token and check it
-        jwt = authorizationHeader.substring(7);
 
         // token should be checked for expiration, corresponding message is sent if it is expired
         try {
             userLogin = jwtService.getLogin(jwt);
         } catch (ExpiredJwtException jwtException) {
-            filterService.handleExpiredAuthToken(response);
+            filterServiceErrorHandler.handleExpiredAuthToken(response);
             return;
         } catch (MalformedJwtException malformedJwtException){
-            filterService.badTokenException(response);
+            filterServiceErrorHandler.badTokenException(response);
             return;
         }
 
@@ -66,7 +63,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 userDetails = this.userDetailsService.loadUserByUsername(userLogin);
             } catch (UsernameNotFoundException exception) {
-                filterService.handleUsernameNotFoundException(response);
+                filterServiceErrorHandler.handleUsernameNotFoundException(response);
                 return;
             }
             var isTokenValid = tokenRepository.findByToken(jwt)
@@ -87,7 +84,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private static final List<String> shouldNotFilterUrls = Arrays.asList("/api/auth/**", "/h2-console/**");
+    private static final List<String> shouldNotFilterUrls = Arrays.asList("/api/auth/**", "/h2-console/**", "/admin/login/**", "/admin/register/**");
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {

@@ -31,6 +31,9 @@ public class SecurityConfig {
     public SecurityFilterChain studentSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
+                    .requestMatchers(new AntPathRequestMatcher("/admin/login/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/admin/register/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/admin/panel/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
                         .anyRequest()

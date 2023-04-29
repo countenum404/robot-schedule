@@ -23,8 +23,13 @@ public class GroupController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addGroup(@RequestParam String group){
-        return new ResponseEntity<Boolean>(studentsService.createGroup(group), HttpStatus.CREATED);
+    public ResponseEntity<?> addGroup(@RequestParam String group) {
+        try {
+            studentsService.createGroup(group);
+            return new ResponseEntity(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Something went wrong");
+        }
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,5 +1,6 @@
 package com.rshu.schedule.security.dto;
 
+import com.rshu.schedule.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,5 @@ public class RegisterRequest {
     private String surname;
     private String login;
     private String password;
+    private Role role;
 }

@@ -1,11 +1,14 @@
 package com.rshu.schedule.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Service
 @AllArgsConstructor
@@ -36,5 +39,13 @@ public class FilterServiceErrorHandler {
     public void handleUsernameNotFoundException(HttpServletResponse response) throws IOException {
         setResponseContent(response);
         response.getWriter().write(objectMapper.writeValueAsString("Credentials is not found"));
+    }
+
+    public void handleAdminPanel(HttpServletRequest request,
+                                 HttpServletResponse response,
+                                 FilterChain filterChain) {
+        if (request.getRequestURI().equals("/admin/panel")) {
+            Arrays.stream(request.getCookies()).forEach(cookie -> System.out.println(cookie.getValue()));
+        }
     }
 }

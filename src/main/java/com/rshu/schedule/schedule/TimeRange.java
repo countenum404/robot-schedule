@@ -1,2 +1,11 @@
-package com.rshu.schedule.schedule;public class TimeRange {
+package com.rshu.schedule.schedule;
+
+public enum TimeRange {
+    FIRST,
+    SECOND,
+    THIRD,
+    FOURTH,
+    FIFTH,
+    SIXTH,
+    SEVENTH
 }
