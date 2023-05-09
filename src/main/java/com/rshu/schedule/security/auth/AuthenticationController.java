@@ -4,6 +4,7 @@ package com.rshu.schedule.security.auth;
 import com.rshu.schedule.security.dto.AuthenticationRequest;
 import com.rshu.schedule.security.dto.AuthenticationResponse;
 import com.rshu.schedule.security.dto.RegisterRequest;
+import com.rshu.schedule.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
+        request.setRole(Role.STUDENT);
         return ResponseEntity.ok(authService.register(request));
     }
 

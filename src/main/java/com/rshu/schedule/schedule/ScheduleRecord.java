@@ -7,7 +7,6 @@ import com.rshu.schedule.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -31,11 +30,18 @@ public class ScheduleRecord {
     @NonNull
     private List<StudyGroup> studyGroup;
 
-
     @ManyToMany
     @JoinColumn(name = "schedule_teacher")
     @NonNull
     private List<User> teacher;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = true)
+    private Day dayOfWeek;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = true)
+    private TimeRange timeOfDay;
 }
 
 

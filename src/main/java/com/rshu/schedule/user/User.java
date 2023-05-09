@@ -20,7 +20,8 @@ import java.util.List;
 @Table(name = "STUDY_ORG_USERS")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "usr_gen", initialValue = 5)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usr_gen")
     @JsonIgnore
     private Long id;
     @Enumerated(EnumType.STRING)
