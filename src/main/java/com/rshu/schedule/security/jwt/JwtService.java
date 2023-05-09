@@ -26,13 +26,11 @@ public class JwtService {
 
     public Optional<String> getJwtFromRequest(HttpServletRequest request) {
         if (new AntPathMatcher().match("/admin/panel/**", request.getRequestURI())) {
-           return Optional.ofNullable(
-                   Arrays.stream(request.getCookies())
-                           .filter(cookie -> cookie.getName().equals("tok"))
-                           .findFirst()
-                           .get()
-                           .getValue()
-           );
+            Cookie c = Arrays.stream(request.getCookies())
+                    .filter(cookie -> cookie.getName().equals("tok"))
+                    .findFirst()
+                    .orElse(null);
+           return Optional.ofNullable(c.getValue());
         } else if (new AntPathMatcher().match("/api/**", request.getRequestURI())){
             return Optional.of(request.getHeader("Authorization").substring(7).trim());
         }

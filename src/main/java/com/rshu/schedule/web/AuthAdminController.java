@@ -1,6 +1,7 @@
 package com.rshu.schedule.web;
 
 import com.rshu.schedule.security.auth.AuthService;
+import com.rshu.schedule.security.dto.AuthenticationRequest;
 import com.rshu.schedule.security.dto.RegisterRequest;
 import com.rshu.schedule.user.Role;
 import lombok.AllArgsConstructor;
@@ -19,8 +20,18 @@ public class AuthAdminController {
     private final AuthService authService;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("auth", new AuthenticationRequest());
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute("auth") AuthenticationRequest auth, Model model) {
+        System.out.println(auth.getLogin());
+        System.out.println(auth.getPassword());
+
+        model.addAttribute("jwt", authService.authenticate(auth).getToken());
+        return "registred";
     }
 
     @GetMapping("/register")

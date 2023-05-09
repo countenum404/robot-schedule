@@ -84,7 +84,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private static final List<String> shouldNotFilterUrls = Arrays.asList("/api/auth/**", "/h2-console/**", "/admin/login/**", "/admin/register/**");
+    private static final List<String> shouldNotFilterUrls = Arrays.asList("/api/auth/**", "/h2-console/**", "/admin/login/**", "/admin/register/**","/js/**", "/**", "/css/**");
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {

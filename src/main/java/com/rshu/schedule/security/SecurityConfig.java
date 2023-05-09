@@ -36,6 +36,12 @@ public class SecurityConfig {
                     .requestMatchers(new AntPathRequestMatcher("/admin/panel/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/static/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/home")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/resources/**")).permitAll()
                         .anyRequest()
                         .permitAll()
                 .and()
@@ -48,5 +54,7 @@ public class SecurityConfig {
         http.headers().frameOptions().disable();
         return http.build();
     }
+
+
 
 }
