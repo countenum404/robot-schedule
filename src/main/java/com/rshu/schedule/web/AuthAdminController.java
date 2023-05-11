@@ -27,9 +27,6 @@ public class AuthAdminController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("auth") AuthenticationRequest auth, Model model) {
-        System.out.println(auth.getLogin());
-        System.out.println(auth.getPassword());
-
         model.addAttribute("jwt", authService.authenticate(auth).getToken());
         return "registred";
     }

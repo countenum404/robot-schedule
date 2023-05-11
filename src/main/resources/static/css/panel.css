@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 h2 {
     font-family: "Roboto", sans-serif;
 }
@@ -7,7 +14,7 @@ h2 {
     padding: 1%;
     display: flex;
     justify-content: left;
-    border: 3px solid #f1f1f1;
+    align-items: center;
     background-color: #333;
 }
 
@@ -21,6 +28,8 @@ h2 {
 
 .header-item {
     float: left;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 .item {
@@ -35,6 +44,11 @@ h2 {
   padding: 14px 16px;
   text-decoration: none;
 }
+
+.header-item:hover {
+    text-decoration: none;
+}
+
 
 .lia:hover {
      background-color: #111;

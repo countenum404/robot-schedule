@@ -1,0 +1,22 @@
+
+
+table, th, td {
+  border: 1px solid;
+}
+
+th {
+    text-align: center;
+    height: 70px;
+}
+
+table {
+    width: 100%;
+}
+
+.users-table {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}

@@ -1,0 +1,39 @@
+
+
+footer {
+    font-family: "Roboto", sans-serif;
+    padding: 1%;
+    background-color: #333;
+    position: absolute;
+    right:0;
+    left:0;
+    bottom:0;
+}
+
+.pagination {
+  display: flex;
+}
+
+
+.pagination a {
+  color: white;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #878686;
+}
+
+.navbar {
+    text-align:center;
+    display: flex;
+    justify-content: center;
+}
+

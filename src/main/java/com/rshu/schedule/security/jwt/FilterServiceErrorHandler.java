@@ -40,12 +40,4 @@ public class FilterServiceErrorHandler {
         setResponseContent(response);
         response.getWriter().write(objectMapper.writeValueAsString("Credentials is not found"));
     }
-
-    public void handleAdminPanel(HttpServletRequest request,
-                                 HttpServletResponse response,
-                                 FilterChain filterChain) {
-        if (request.getRequestURI().equals("/admin/panel")) {
-            Arrays.stream(request.getCookies()).forEach(cookie -> System.out.println(cookie.getValue()));
-        }
-    }
 }
