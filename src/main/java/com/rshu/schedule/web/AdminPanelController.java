@@ -37,6 +37,11 @@ public class AdminPanelController {
         return "groups";
     }
 
+    @GetMapping("/schedule")
+    public String schedule() {
+        return "schedule";
+    }
+
 
     @GetMapping("/about")
     public String about(Model model) {
