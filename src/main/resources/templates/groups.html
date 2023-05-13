@@ -37,6 +37,8 @@
     </tr>
     <tr th:each="group : ${groups}">
       <td><span th:text="${group.getName}"> Group Name </span></td>
+      <td class="btn"><button class="td-btn">Edit</button></td>
+      <td class="btn"><button class="td-btn">Delete</button></td>
     </tr>
     </tbody>
   </table>
