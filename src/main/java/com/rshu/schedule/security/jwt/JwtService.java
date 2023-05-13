@@ -26,11 +26,16 @@ public class JwtService {
 
     public Optional<String> getJwtFromRequest(HttpServletRequest request) {
         if (new AntPathMatcher().match("/admin/panel/**", request.getRequestURI())) {
-            Cookie c = Arrays.stream(request.getCookies())
-                    .filter(cookie -> cookie.getName().equals("tok"))
-                    .findFirst()
-                    .orElse(null);
-           return Optional.ofNullable(c.getValue());
+            try {
+                Cookie c = Arrays.stream(request.getCookies())
+                        .filter(cookie -> cookie.getName().equals("tok"))
+                        .findFirst()
+                        .orElse(null);
+                return Optional.ofNullable(c.getValue());
+
+            } catch (NullPointerException exception) {
+                return Optional.empty();
+            }
         } else if (new AntPathMatcher().match("/api/**", request.getRequestURI())){
             return Optional.of(request.getHeader("Authorization").substring(7).trim());
         }
@@ -47,7 +52,7 @@ public class JwtService {
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 60000 * 60 * 24))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

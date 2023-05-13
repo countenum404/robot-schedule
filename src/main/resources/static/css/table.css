@@ -1,0 +1,41 @@
+
+
+th, td {
+  border: 1px solid;
+}
+
+th {
+    text-align: center;
+    height: 70px;
+}
+
+table {
+    width: 100%;
+}
+
+.content-table {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+.btn {
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}

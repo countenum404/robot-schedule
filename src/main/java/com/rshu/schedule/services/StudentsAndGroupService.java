@@ -11,10 +11,14 @@ import com.rshu.schedule.study.group.GroupRepository;
 import com.rshu.schedule.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,7 +40,11 @@ public class StudentsAndGroupService {
         return userRepository.findAll();
     }
 
-    public Collection<StudyGroup> getGroups(){
+    public Page<StudyGroup> getGroups(Pageable pageable){
+        return groupRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
+    }
+
+    public List<StudyGroup> getGroups(){
         return groupRepository.findAll();
     }
 
