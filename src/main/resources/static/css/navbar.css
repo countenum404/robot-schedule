@@ -7,13 +7,18 @@ footer {
     position: absolute;
     right:0;
     left:0;
-    bottom:0;
+    position: fixed;
+    bottom: 0px;
 }
 
 .pagination {
   display: flex;
 }
 
+.text {
+    width: 60%;
+    margin: auto;
+}
 
 .pagination a {
   color: white;

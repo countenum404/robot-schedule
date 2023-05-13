@@ -13,7 +13,7 @@ table {
     width: 100%;
 }
 
-.users-table {
+.content-table {
     display: flex;
     justify-content: center;
     margin-left: auto;

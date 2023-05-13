@@ -1,6 +1,7 @@
 package com.rshu.schedule.web;
 
 
+import com.rshu.schedule.services.StudentsAndGroupService;
 import com.rshu.schedule.user.User;
 import com.rshu.schedule.user.UserService;
 import lombok.AllArgsConstructor;
@@ -20,17 +21,19 @@ import java.util.List;
 public class AdminPanelController {
 
     private final UserService userService;
+    private final StudentsAndGroupService studentsAndGroupService;
 
     @GetMapping("/users")
     public String users(Model model,
-                        @PageableDefault(sort = { "lastname" }, direction = Sort.Direction.DESC, size = 1) Pageable pageable) {
-        Page<User> pages = userService.getAllUsers(pageable);
-        model.addAttribute("usersList", pages);
+                        @PageableDefault(sort = { "lastname" }, direction = Sort.Direction.DESC, size = 30) Pageable pageable) {
+        model.addAttribute("usersList", userService.getAllUsers(pageable));
         return "users";
     }
 
     @GetMapping("/groups")
-    public String groups() {
+    public String groups(Model model,
+                         @PageableDefault(sort = { "lastname" }, direction = Sort.Direction.DESC, size = 1) Pageable pageable) {
+        model.addAttribute("groups", studentsAndGroupService.getGroups(pageable));
         return "groups";
     }
 
