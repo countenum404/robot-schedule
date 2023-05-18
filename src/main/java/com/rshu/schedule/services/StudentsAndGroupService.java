@@ -25,9 +25,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class StudentsAndGroupService {
     private final UserDetailsService userDetailsService;
-
     private final UserRepository userRepository;
-
     private final GroupRepository groupRepository;
 
     public boolean createStudent(String firstName, String secondName, String surname){
@@ -89,5 +87,9 @@ public class StudentsAndGroupService {
             return null;
         });
         return group;
+    }
+
+    public void deleteGroup(Long id) {
+        groupRepository.deleteById(id);
     }
 }

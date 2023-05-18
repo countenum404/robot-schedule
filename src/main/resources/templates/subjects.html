@@ -29,21 +29,18 @@
     <table>
         <thead>
         <tr>
-            <th> Study Group </th>
-            <th> Teacher </th>
             <th> Subject </th>
-            <th> Time </th>
-            <th class="add-btn"><a th:href="@{/admin/panel/schedule/new}"><button>Add</button></a></th>
+            <th class="add-btn"><a th:href="@{/admin/panel/subjects/new}"><button>Add</button></a></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${records.empty}">
-            <td colspan="4"> Records not found </td>
+        <tr th:if="${subjects.empty}">
+            <td colspan="1"> Subjects not found </td>
         </tr>
-        <tr th:each="record : ${records}">
-            <td><span th:text="${record.group}"> Study Group </span></td>
-            <td><span th:text="${record.teacher.lastname}"> Teacher </span></td>
-            <td><span th:text="${record.subject}"> Subject </span></td>
+        <tr th:each="subject : ${subjects}">
+            <td><span th:text="${subject.getName}"> Subject </span></td>
+            <td class="btn"><button class="td-btn">Edit</button></td>
+            <!-- <td class="btn"><a th:href="@{/admin/panel/groups/delete?id={id}(id=${group.id})}"><button class="td-btn">Delete</button></a></td> -->
         </tr>
         </tbody>
     </table>
@@ -51,11 +48,11 @@
 
 <footer>
     <div class="navbar">
-        <!-- <ul class="pagination" th:if="${groups.totalPages > 0}">
+        <ul class="pagination" th:if="${subjects.totalPages > 0}">
             <li th:each="pageNumber : ${#numbers.sequence(0, groups.totalPages - 1)}">
-                <a th:text="${pageNumber + 1}"  th:href="@{/admin/panel/groups(size=1, page=${pageNumber})}" th:class="${pageNumber==groups.number} ? active"/>
+                <a th:text="${pageNumber + 1}"  th:href="@{/admin/panel/subjects(size=1, page=${pageNumber})}" th:class="${pageNumber==subjects.number} ? active"/>
             </li>
-        </ul> -->
+        </ul>
     </div>
 </footer>
 

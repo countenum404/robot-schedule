@@ -1,10 +1,12 @@
 package com.rshu.schedule.study.group;
 
 
+import com.rshu.schedule.schedule.ScheduleRecord;
 import com.rshu.schedule.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class StudyGroup {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gr_gen")
     private long id;
     private String name;
+
+    @ManyToMany(mappedBy = "studyGroups", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<ScheduleRecord> scheduleRecords = new ArrayList<>();
 
     @OneToMany(mappedBy = "group")
     private List<User> users;

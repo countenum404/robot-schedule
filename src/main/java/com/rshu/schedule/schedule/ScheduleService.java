@@ -8,9 +8,11 @@ import com.rshu.schedule.subjects.SubjectService;
 import com.rshu.schedule.user.TeacherDTO;
 import com.rshu.schedule.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,12 +39,16 @@ public class ScheduleService {
                                             .lastname(u.getLastname())
                                             .surname(u.getSurname())
                                             .build())
-                                    .group(scheduleRecord.getStudyGroup().get(0).getName())
+                                    .group(scheduleRecord.getStudyGroups().get(0).getName())
                                     .subject(scheduleRecord.getSubject().get(0).getName())
                                     .build();
                         }
                 )
                 .collect(Collectors.toList());
+    }
+
+    public Page<ScheduleRecord> allRecords(Pageable pageable) {
+        return scheduleRepo.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
     }
 
     public Boolean createScheduleRecord(ScheduleDto schedule) {
@@ -59,7 +65,7 @@ public class ScheduleService {
                     .builder()
                     .subject(Arrays.asList(subject))
                     .teacher(Arrays.asList(teacher))
-                    .studyGroup(Arrays.asList(group))
+                    .studyGroups(Arrays.asList(group))
                     .build();
             System.out.println(record);
             scheduleRepo.save(record);
