@@ -25,28 +25,29 @@
     </ul>
 </div>
 
-<div class="content-table">
-    <table>
-        <thead>
-        <tr>
-            <th> Study Group </th>
-            <th> Teacher </th>
-            <th> Subject </th>
-            <th> Time </th>
-            <th class="add-btn"><a th:href="@{/admin/panel/schedule/new}"><button>Add</button></a></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${records.empty}">
-            <td colspan="4"> Records not found </td>
-        </tr>
-        <tr th:each="record : ${records}">
-            <td><span th:text="${record.group}"> Study Group </span></td>
-            <td><span th:text="${record.teacher.lastname}"> Teacher </span></td>
-            <td><span th:text="${record.subject}"> Subject </span></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="form">
+        <form>
+            <div class="input">
+                <label for="teacher"><b>Teacher</b></label>
+                <select>
+                    <option name="teacher" th:each="teacher : ${teachers}" th:text="${teacher.firstname} + ' ' + ${teacher.lastname}"/>
+                </select>
+            </div>
+            <div class="input">
+                <label for="group"><b>Study Group</b></label>
+                <select>
+                    <option name="group" th:each="group : ${groups}" th:text="${group.getName}"/>
+                </select>
+            </div>
+            <div class="input">
+                <label for="subject"><b>Subjects</b></label>
+                <select>
+                    <option name="subject" th:each="subject : ${subjects}" th:text="${subject.getName}"/>
+                </select>
+            </div>
+        </form>
+    </div>
 </div>
 
 <footer>

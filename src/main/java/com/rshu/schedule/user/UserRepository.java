@@ -3,6 +3,7 @@ package com.rshu.schedule.user;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -16,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
                   String login,
                   Role role
     );
+
+    List<User> findAllByRole(Role role);
 }

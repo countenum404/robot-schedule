@@ -21,6 +21,7 @@
             <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
             <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
             <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
+            <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
             <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
         </ul>
     </div>
@@ -34,11 +35,12 @@
             <th> Firstname </th>
             <th> Surname </th>
             <th> Role </th>
+            <th class="add-btn"><a th:href="@{/admin/panel/users/new}"><button>Add</button></a></th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${usersList.empty}">
-            <td colspan="2"> Users not found </td>
+            <td colspan="4"> Users not found </td>
         </tr>
         <tr th:each="user : ${usersList}">
             <td><span th:text="${user.lastname}"> Lastname </span></td>
@@ -46,7 +48,7 @@
             <td><span th:text="${user.surname}"> Surname </span></td>
             <td><span th:text="${user.role}"> Role </span></td>
             <td class="btn"><button class="td-btn">Edit</button></td>
-            <td class="btn"><button class="td-btn">Delete</button></td>
+            <td class="btn"><a th:href="@{/admin/panel/users/delete?id={id}(id=${user.id})}"><button class="td-btn">Delete</button></a></td>
         </tr>
         </tbody>
     </table>
@@ -63,5 +65,5 @@
 </footer>
 
 </body>
-    <script src="/js/cookies.js"></script>
+    <script src="/js/script.js"></script>
 </html>

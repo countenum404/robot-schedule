@@ -7,6 +7,7 @@ import com.rshu.schedule.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,27 +21,22 @@ public class ScheduleRecord {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToMany
-    @JoinColumn(name = "schedule_subjects")
     @NonNull
+    @ManyToMany
     private List<Subject> subject;
 
-    @ManyToMany
-    @JoinColumn(name = "schedule_group")
     @NonNull
-    private List<StudyGroup> studyGroup;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<StudyGroup> studyGroups = new ArrayList<>();
 
-    @ManyToMany
-    @JoinColumn(name = "schedule_teacher")
     @NonNull
-    private List<User> teacher;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<User> teacher = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
     private Day dayOfWeek;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
     private TimeRange timeOfDay;
 }
 

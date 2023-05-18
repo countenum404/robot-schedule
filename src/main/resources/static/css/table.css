@@ -4,6 +4,11 @@ th, td {
   border: 1px solid;
 }
 
+.add-btn {
+    width: 15%;
+    border: 0px;
+}
+
 th {
     text-align: center;
     height: 70px;
@@ -32,7 +37,7 @@ button {
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  width: 100%;
+  width: 80px;
 }
 
 /* Add a hover effect for buttons */

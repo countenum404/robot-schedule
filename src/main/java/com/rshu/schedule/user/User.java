@@ -1,6 +1,8 @@
 package com.rshu.schedule.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rshu.schedule.schedule.ScheduleRecord;
+import com.rshu.schedule.security.token.Token;
 import com.rshu.schedule.study.group.StudyGroup;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +23,7 @@ import java.util.List;
 @Table(name = "STUDY_ORG_USERS")
 public class User implements UserDetails {
     @Id
-    @SequenceGenerator(name = "usr_gen", initialValue = 5)
+    @SequenceGenerator(name = "usr_gen", initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usr_gen")
     @JsonIgnore
     private Long id;
@@ -37,6 +40,12 @@ public class User implements UserDetails {
     private String login;
     private String password;
 
+    @ManyToMany(mappedBy = "teacher", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
+    private List<ScheduleRecord> records = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+    private List<Token> tokens;
 
     @ManyToOne
     @JoinColumn(name = "study_group_id")

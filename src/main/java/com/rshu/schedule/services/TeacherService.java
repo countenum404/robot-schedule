@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -20,5 +22,9 @@ public class TeacherService {
         User teacher = userRepository.findUser(firstname,
                 lastname, surname, Role.TEACHER);
         return teacher;
+    }
+
+    public List<User> getAllTeachers() {
+        return userRepository.findAllByRole(Role.TEACHER);
     }
 }

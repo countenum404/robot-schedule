@@ -25,33 +25,17 @@
     </ul>
 </div>
 
-<div class="content-table">
-    <table>
-        <thead>
-        <tr>
-            <th> Study Group </th>
-            <th> Teacher </th>
-            <th> Subject </th>
-            <th> Time </th>
-            <th class="add-btn"><a th:href="@{/admin/panel/schedule/new}"><button>Add</button></a></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${records.empty}">
-            <td colspan="4"> Records not found </td>
-        </tr>
-        <tr th:each="record : ${records}">
-            <td><span th:text="${record.group}"> Study Group </span></td>
-            <td><span th:text="${record.teacher.lastname}"> Teacher </span></td>
-            <td><span th:text="${record.subject}"> Subject </span></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<form method="post" th:action="@{/admin/panel/groups/new}">
+    <label for="studyGroupName"><b>Group Name</b></label>
+    <input placeholder="Enter a group name" type="text" th:value="${studyGroupName}" name="create-group"/>
+    <div>
+        <button>Submit</button>
+    </div>
+</form>
 
 <footer>
     <div class="navbar">
-        <!-- <ul class="pagination" th:if="${groups.totalPages > 0}">
+        <!--<ul class="pagination" th:if="${groups.totalPages > 0}">
             <li th:each="pageNumber : ${#numbers.sequence(0, groups.totalPages - 1)}">
                 <a th:text="${pageNumber + 1}"  th:href="@{/admin/panel/groups(size=1, page=${pageNumber})}" th:class="${pageNumber==groups.number} ? active"/>
             </li>

@@ -16,4 +16,8 @@ public class UserService {
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
     }
+
+    public void deleteUser(long id) {
+        userRepository.deleteById(id);
+    }
 }
