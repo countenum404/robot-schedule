@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.templateparser.text.TextTemplateParser;
 
 @Controller
-@RequestMapping("/admin/panel")
+@RequestMapping("/admin/panel/schedule")
 @AllArgsConstructor
 public class ScheduleAdminController {
 
@@ -26,13 +26,13 @@ public class ScheduleAdminController {
     private final SubjectService subjectService;
     private final TeacherService teacherService;
 
-    @GetMapping("/schedule")
+    @GetMapping
     public String getSchedulePage(Model model) {
         model.addAttribute("records", scheduleService.allRecords());
         return "schedule";
     }
 
-    @GetMapping("/schedule/new")
+    @GetMapping("/new")
     public String getNewRecordPage(Model model) {
         model.addAttribute("teachers", teacherService.getAllTeachers());
         model.addAttribute("groups", studentsAndGroupService.getGroups());
@@ -41,8 +41,10 @@ public class ScheduleAdminController {
         return "new-record";
     }
 
-    @PostMapping("/schedule/new")
+    @PostMapping("/new")
     public String addNewRecord(@ModelAttribute("record") ScheduleDto scheduleDto) {
+        System.out.println(scheduleDto);
+        scheduleService.createScheduleRecord(scheduleDto);
         return "redirect:/admin/panel/schedule";
     }
 }

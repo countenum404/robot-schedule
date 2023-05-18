@@ -49,7 +49,7 @@
 <footer>
     <div class="navbar">
         <ul class="pagination" th:if="${subjects.totalPages > 0}">
-            <li th:each="pageNumber : ${#numbers.sequence(0, groups.totalPages - 1)}">
+            <li th:each="pageNumber : ${#numbers.sequence(0, subjects.totalPages - 1)}">
                 <a th:text="${pageNumber + 1}"  th:href="@{/admin/panel/subjects(size=1, page=${pageNumber})}" th:class="${pageNumber==subjects.number} ? active"/>
             </li>
         </ul>

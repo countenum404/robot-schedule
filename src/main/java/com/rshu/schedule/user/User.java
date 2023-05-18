@@ -95,7 +95,7 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "User{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +

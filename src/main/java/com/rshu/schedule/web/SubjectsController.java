@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin/panel/subjects")
@@ -23,5 +24,17 @@ public class SubjectsController {
                               @PageableDefault(direction = Sort.Direction.DESC, size = 30) Pageable pageable) {
         model.addAttribute("subjects", subjectService.getAllSubjects(pageable));
         return "subjects";
+    }
+
+    @GetMapping("/new")
+    public String addGroupPage (Model model) {
+        model.addAttribute("create-subject", new String());
+        return "new-subject";
+    }
+
+    @PostMapping("/new")
+    public String addSubject(@RequestParam String subjectName) {
+        subjectService.createSubject(subjectName);
+        return "redirect:/admin/panel/subjects";
     }
 }

@@ -27,24 +27,27 @@
 
 <div class="container">
     <div class="form">
-        <form>
+        <form action="#" method="post" th:action="@{/admin/panel/schedule/new}">
             <div class="input">
                 <label for="teacher"><b>Teacher</b></label>
-                <select>
-                    <option name="teacher" th:each="teacher : ${teachers}" th:text="${teacher.firstname} + ' ' + ${teacher.lastname}"/>
+                <select th:name="teacherId">
+                    <option name="teacher" th:each="teacher : ${teachers}" th:text="${teacher.firstname} + ' ' + ${teacher.lastname}" th:value="${teacher.id}"/>
                 </select>
             </div>
             <div class="input">
                 <label for="group"><b>Study Group</b></label>
-                <select>
-                    <option name="group" th:each="group : ${groups}" th:text="${group.getName}"/>
+                <select th:name="group">
+                    <option name="group" th:each="group : ${groups}" th:text="${group.getName}" th:value="${group.getName}"/>
                 </select>
             </div>
             <div class="input">
                 <label for="subject"><b>Subjects</b></label>
-                <select>
-                    <option name="subject" th:each="subject : ${subjects}" th:text="${subject.getName}"/>
+                <select th:name="subject">
+                    <option name="subject" th:each="subject : ${subjects}" th:text="${subject.getName}" th:value="${subject.getName}"/>
                 </select>
+            </div>
+            <div>
+                <button>Add Record</button>
             </div>
         </form>
     </div>

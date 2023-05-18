@@ -36,14 +36,12 @@ public class UserAdminController {
 
     @PostMapping("/users/new")
     public String addNewUser(@ModelAttribute("request") RegisterRequest registerRequest) {
-        System.out.println(registerRequest.getRole());
         authService.register(registerRequest);
         return "redirect:/admin/panel/users";
     }
 
     @GetMapping("/users/delete")
     public String deleteUser(@RequestParam long id) {
-        System.out.println(id);
         userService.deleteUser(id);
         return "redirect:/admin/panel/users";
     }
