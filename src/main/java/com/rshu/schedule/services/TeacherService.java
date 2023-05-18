@@ -3,12 +3,11 @@ package com.rshu.schedule.services;
 import com.rshu.schedule.user.Role;
 import com.rshu.schedule.user.User;
 import com.rshu.schedule.user.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -22,6 +21,10 @@ public class TeacherService {
         User teacher = userRepository.findUser(firstname,
                 lastname, surname, Role.TEACHER);
         return teacher;
+    }
+
+    public Optional<User> findTeacher(Long id) {
+        return userRepository.findById(id);
     }
 
     public List<User> getAllTeachers() {

@@ -44,6 +44,7 @@ public class ScheduleAdminController {
     @PostMapping("/new")
     public String addNewRecord(@ModelAttribute("record") ScheduleDto scheduleDto) {
         System.out.println(scheduleDto);
+        scheduleService.createScheduleRecord(scheduleDto);
         return "redirect:/admin/panel/schedule";
     }
 }

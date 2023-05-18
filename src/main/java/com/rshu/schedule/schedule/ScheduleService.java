@@ -23,7 +23,6 @@ public class ScheduleService {
     private final ScheduleRepo scheduleRepo;
     private final StudentsAndGroupService studentsAndGroupService;
     private final TeacherService teacherService;
-
     private final SubjectService subjectService;
 
     public List<ScheduleDto> allRecords() {
@@ -55,11 +54,17 @@ public class ScheduleService {
         try {
             StudyGroup group = studentsAndGroupService.findGroup(schedule.getGroup());
             TeacherDTO teacherDTO = schedule.getTeacher();
-            User teacher = teacherService.findTeacher(
-                    teacherDTO.getFirstname(),
-                    teacherDTO.getLastname(),
-                    teacherDTO.getSurname()
-            );
+            Long teacher_id = schedule.getTeacherId();
+            User teacher;
+            if (teacherDTO != null) {
+                teacher = teacherService.findTeacher(
+                        teacherDTO.getFirstname(),
+                        teacherDTO.getLastname(),
+                        teacherDTO.getSurname()
+                );
+            } else {
+                teacher = teacherService.findTeacher(teacher_id).get();
+            }
             Subject subject = subjectService.findSubject(schedule.getSubject());
             ScheduleRecord record = ScheduleRecord
                     .builder()
