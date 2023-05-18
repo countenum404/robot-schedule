@@ -1,12 +1,10 @@
 package com.rshu.schedule.schedule;
 
-import com.rshu.schedule.study.group.StudyGroup;
-import com.rshu.schedule.subjects.Subject;
 import com.rshu.schedule.user.TeacherDTO;
-import com.rshu.schedule.user.User;
-import lombok.*;
-
-import java.util.Collection;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
@@ -14,6 +12,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScheduleDto {
+    Long teacherId;
     TeacherDTO teacher;
     String group;
     String subject;
@@ -21,9 +20,10 @@ public class ScheduleDto {
     @Override
     public String toString() {
         return "ScheduleDto{" +
-                "teachers=" + teacher +
-                ", groups=" + group +
-                ", subjects=" + subject +
+                "teacherId=" + teacherId +
+                ", teacher=" + teacher +
+                ", group='" + group + '\'' +
+                ", subject='" + subject + '\'' +
                 '}';
     }
 }
