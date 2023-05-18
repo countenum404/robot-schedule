@@ -24,4 +24,8 @@ public class Subject {
                 "subjectName='" + name + '\'' +
                 '}';
     }
+
+    public Subject(String name) {
+        this.name = name;
+    }
 }

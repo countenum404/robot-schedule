@@ -67,7 +67,6 @@ public class ScheduleService {
                     .teacher(Arrays.asList(teacher))
                     .studyGroups(Arrays.asList(group))
                     .build();
-            System.out.println(record);
             scheduleRepo.save(record);
         } catch (Exception e) {
             return false;

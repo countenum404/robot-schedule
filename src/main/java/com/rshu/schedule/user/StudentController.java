@@ -28,7 +28,6 @@ public class StudentController {
         }
         try {
             User user = studentsService.findStudent(firstname, lastname, surname);
-            System.out.println(user);
             return new ResponseEntity<User>(user, HttpStatus.OK);
         } catch (EntityNotFoundException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());

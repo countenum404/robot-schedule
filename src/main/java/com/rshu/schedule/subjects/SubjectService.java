@@ -23,4 +23,8 @@ public class SubjectService {
     public Page<Subject> getAllSubjects(Pageable pageable) {
         return subjectRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
     }
+
+    public void createSubject(String name) {
+        subjectRepository.save(new Subject(name));
+    }
 }
