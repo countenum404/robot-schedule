@@ -22,15 +22,15 @@ public class ScheduleRecord {
     private Long id;
 
     @NonNull
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Subject> subject;
 
     @NonNull
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<StudyGroup> studyGroups = new ArrayList<>();
 
     @NonNull
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<User> teacher = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)

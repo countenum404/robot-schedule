@@ -71,6 +71,8 @@ public class ScheduleService {
                     .subject(Arrays.asList(subject))
                     .teacher(Arrays.asList(teacher))
                     .studyGroups(Arrays.asList(group))
+                    .dayOfWeek(schedule.getDayRange())
+                    .timeOfDay(schedule.getTimeRange())
                     .build();
             scheduleRepo.save(record);
         } catch (Exception e) {

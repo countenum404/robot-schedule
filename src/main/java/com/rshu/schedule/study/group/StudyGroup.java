@@ -26,7 +26,7 @@ public class StudyGroup {
     private long id;
     private String name;
 
-    @ManyToMany(mappedBy = "studyGroups", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "studyGroups", cascade = CascadeType.ALL)
     private List<ScheduleRecord> scheduleRecords = new ArrayList<>();
 
     @OneToMany(mappedBy = "group")
