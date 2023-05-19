@@ -16,6 +16,8 @@ public class ScheduleDto {
     TeacherDTO teacher;
     String group;
     String subject;
+    TimeRange timeRange;
+    Day dayRange;
 
     @Override
     public String toString() {
