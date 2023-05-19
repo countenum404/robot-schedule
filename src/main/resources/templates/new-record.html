@@ -46,6 +46,22 @@
                     <option name="subject" th:each="subject : ${subjects}" th:text="${subject.getName}" th:value="${subject.getName}"/>
                 </select>
             </div>
+            <div class="input">
+                <label for="day"><b>Day</b></label>
+                <select th:name="dayRange">
+                    <option  th:each="day : ${T(com.rshu.schedule.schedule.Day).values()}"
+                             th:value="${{day}}"
+                             th:text="${{day}}">
+                </select>
+            </div>
+            <div class="input">
+                <label for="subject"><b>Time</b></label>
+                <select th:name="timeRange">
+                    <option  th:each="time : ${T(com.rshu.schedule.schedule.TimeRange).values()}"
+                             th:value="${{time}}"
+                             th:text="${{time}}">
+                </select>
+            </div>
             <div>
                 <button>Add Record</button>
             </div>

@@ -12,7 +12,7 @@ public class DateAndTimeService {
     public ScheduleRecord addTimeAndDate(ScheduleDto scheduleDto, StudyGroup group) {
         TimeRange range = scheduleDto.getTimeRange();
         Day day = scheduleDto.getDayRange();
-        ScheduleRecord record = recordsRepository.findByStudyGroupId(group.getId());
+        // ScheduleRecord record = recordsRepository.findByStudyGroupId(group.getId());
         return ScheduleRecord.builder().build();
     }
 

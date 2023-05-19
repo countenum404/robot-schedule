@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private String login;
     private String password;
 
-    @ManyToMany(mappedBy = "teacher", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ScheduleRecord> records = new ArrayList<>();
 
