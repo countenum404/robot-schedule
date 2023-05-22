@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         jwt = jwtService.getJwtFromRequest(request).orElse("");
         if (jwt.isBlank() || jwt.isEmpty()) {
-            filterServiceErrorHandler.handleMissedAuthToken(response);
+            filterServiceErrorHandler.handleMissedAuthToken(request, response);
             return;
         }
 
@@ -52,10 +52,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             userLogin = jwtService.getLogin(jwt);
         } catch (ExpiredJwtException jwtException) {
-            filterServiceErrorHandler.handleExpiredAuthToken(response);
+            filterServiceErrorHandler.handleExpiredAuthToken(request,response);
             return;
         } catch (MalformedJwtException malformedJwtException){
-            filterServiceErrorHandler.badTokenException(response);
+            filterServiceErrorHandler.badTokenException(request, response);
             return;
         }
 

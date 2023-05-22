@@ -36,8 +36,14 @@ public class JwtService {
             } catch (NullPointerException exception) {
                 return Optional.empty();
             }
-        } else if (new AntPathMatcher().match("/api/**", request.getRequestURI())){
-            return Optional.of(request.getHeader("Authorization").substring(7).trim());
+        } else if (new AntPathMatcher().match("/api/**", request.getRequestURI())) {
+            Optional<String> apiJwt;
+            try {
+                apiJwt = Optional.of(request.getHeader("Authorization").substring(7).trim());
+            } catch (NullPointerException npe) {
+                return Optional.empty();
+            }
+            return apiJwt;
         }
         return Optional.empty();
     }
