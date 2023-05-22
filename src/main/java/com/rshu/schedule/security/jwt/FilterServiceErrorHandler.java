@@ -31,14 +31,23 @@ public class FilterServiceErrorHandler {
         }
     }
 
-    public void handleExpiredAuthToken(HttpServletResponse response) throws IOException {
-        setResponseContent(response);
-        response.getWriter().write(objectMapper.writeValueAsString("Auth token is expired"));
+    public void handleExpiredAuthToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (new AntPathMatcher().match("/api/**", request.getRequestURI())) {
+            setResponseContent(response);
+            response.getWriter().write(objectMapper.writeValueAsString("Auth token is expired"));
+        } else {
+            response.sendRedirect("/admin/login");
+        }
+
     }
 
-    public void badTokenException(HttpServletResponse response) throws IOException {
-        setResponseContent(response);
-        response.getWriter().write(objectMapper.writeValueAsString("Bad auth token"));
+    public void badTokenException(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (new AntPathMatcher().match("/api/**", request.getRequestURI())) {
+            setResponseContent(response);
+            response.getWriter().write(objectMapper.writeValueAsString("Bad auth token"));
+        } else {
+            response.sendRedirect("/admin/login");
+        }
     }
 
     public void handleUsernameNotFoundException(HttpServletResponse response) throws IOException {
