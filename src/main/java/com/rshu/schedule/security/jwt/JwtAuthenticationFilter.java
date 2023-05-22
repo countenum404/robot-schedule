@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         jwt = jwtService.getJwtFromRequest(request).orElse("");
         if (jwt.isBlank() || jwt.isEmpty()) {
-            filterServiceErrorHandler.handleMissedAuthToken(response);
+            filterServiceErrorHandler.handleMissedAuthToken(request, response);
             return;
         }
 

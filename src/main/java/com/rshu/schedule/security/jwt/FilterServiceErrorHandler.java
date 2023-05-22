@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.AntPathMatcher;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -21,9 +22,13 @@ public class FilterServiceErrorHandler {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
     }
 
-    public void handleMissedAuthToken(HttpServletResponse response) throws IOException {
-        setResponseContent(response);
-        response.getWriter().write(objectMapper.writeValueAsString("Missed Auth token"));
+    public void handleMissedAuthToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (new AntPathMatcher().match("/api/**", request.getRequestURI())) {
+            setResponseContent(response);
+            response.getWriter().write(objectMapper.writeValueAsString("Missed Auth token"));
+        } else {
+            response.sendRedirect("/admin/login");
+        }
     }
 
     public void handleExpiredAuthToken(HttpServletResponse response) throws IOException {
