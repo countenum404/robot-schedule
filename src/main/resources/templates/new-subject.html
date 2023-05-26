@@ -12,26 +12,16 @@
   <link rel="stylesheet" href="/css/navbar.css" />
 </head>
 <body>
-<div class="header-container">
-  <div class="logo">
-    <a href="/admin/panel"><img src="/images/logo.png"></a>
-  </div>
-  <ul class="header-list">
-    <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
-  </ul>
-</div>
 
-<form method="post" th:action="@{/admin/panel/subjects/new}">
-  <label for="subjectName"><b>Name</b></label>
-  <input placeholder="Enter a group name" type="text" th:value="${subjectName}" name="subjectName"/>
-  <div>
-    <button>Submit</button>
-  </div>
-</form>
+  <div th:replace="fragments :: header"></div>
+
+  <form method="post" th:action="@{/admin/panel/subjects/new}">
+    <label for="subjectName"><b>Name</b></label>
+    <input placeholder="Enter a group name" type="text" th:value="${subjectName}" name="subjectName"/>
+    <div>
+      <button>Submit</button>
+    </div>
+  </form>
 
 <footer>
   <div class="navbar">

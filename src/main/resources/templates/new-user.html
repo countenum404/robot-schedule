@@ -12,58 +12,48 @@
   <link rel="stylesheet" href="/css/navbar.css" />
 </head>
 <body>
-<div class="header-container">
-  <div class="logo">
-    <a href="/admin/panel"><img src="/images/logo.png"></a>
-  </div>
-  <ul class="header-list">
-    <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
-  </ul>
-</div>
 
-<div class="container">
-  <div class="form">
-    <form action="#" method="post" th:action="@{/admin/panel/users/new}" th:object="${request}">
-      <div >
-        <div class="input">
-          <label for="uname"><b>Name</b></label>
-          <input placeholder="name" type="text" th:field="*{firstname}" name="uname"/>
+  <div th:replace="fragments :: header"></div>
+
+  <div class="container">
+    <div class="form">
+      <form action="#" method="post" th:action="@{/admin/panel/users/new}" th:object="${request}">
+        <div >
+          <div class="input">
+            <label for="uname"><b>Name</b></label>
+            <input placeholder="name" type="text" th:field="*{firstname}" name="uname"/>
+          </div>
+          <div class="input">
+            <label for="lastname"><b>Lastname</b></label>
+            <input placeholder="lastname" type="text" th:field="*{lastname}" name="lastname"/>
+          </div>
+          <div class="input">
+            <label for="surname"><b>Surname</b></label>
+            <input placeholder="surname" type="text" th:field="*{surname}" name="surname"/>
+          </div>
+          <div class="input">
+            <label for="login"><b>Login</b></label>
+            <input placeholder="login" type="text" th:field="*{login}" name="login"/>
+          </div>
+          <div class="input">
+            <label for="role"><b>Role</b></label>
+            <select th:name="Role">
+              <option value="ADMIN">Admin</option>
+              <option value="STUDENT">Student</option>
+              <option value="TEACHER">Teacher</option>
+            </select>
+          </div>
+          <div class="input">
+            <label for="password"><b>Password</b></label>
+            <input placeholder="password" type="password" th:field="*{password}" name="password"/>
+          </div>
+          <div>
+            <button>Add User</button>
+          </div>
         </div>
-        <div class="input">
-          <label for="lastname"><b>Lastname</b></label>
-          <input placeholder="lastname" type="text" th:field="*{lastname}" name="lastname"/>
-        </div>
-        <div class="input">
-          <label for="surname"><b>Surname</b></label>
-          <input placeholder="surname" type="text" th:field="*{surname}" name="surname"/>
-        </div>
-        <div class="input">
-          <label for="login"><b>Login</b></label>
-          <input placeholder="login" type="text" th:field="*{login}" name="login"/>
-        </div>
-        <div class="input">
-          <label for="role"><b>Role</b></label>
-          <select th:name="Role">
-            <option value="ADMIN">Admin</option>
-            <option value="STUDENT">Student</option>
-            <option value="TEACHER">Teacher</option>
-          </select>
-        </div>
-        <div class="input">
-          <label for="password"><b>Password</b></label>
-          <input placeholder="password" type="password" th:field="*{password}" name="password"/>
-        </div>
-        <div>
-          <button>Add User</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
 
 <footer>
   <div class="navbar">

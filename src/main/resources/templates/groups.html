@@ -12,39 +12,29 @@
   <link rel="stylesheet" href="/css/navbar.css" />
 </head>
 <body>
-<div class="header-container">
-  <div class="logo">
-    <a href="/admin/panel"><img src="/images/logo.png"></a>
-  </div>
-  <ul class="header-list">
-    <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
-    <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
-  </ul>
-</div>
 
-<div class="content-table">
-  <table>
-    <thead>
-    <tr>
-      <th> Group Name </th>
-      <th class="add-btn"><a th:href="@{/admin/panel/groups/new}"><button>Add</button></a></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${groups.empty}">
-      <td colspan="1"> Groups not found </td>
-    </tr>
-    <tr th:each="group : ${groups}">
-      <td><span th:text="${group.getName}"> Group Name </span></td>
-      <td class="btn"><button class="td-btn">Edit</button></td>
-      <td class="btn"><a th:href="@{/admin/panel/groups/delete?id={id}(id=${group.id})}"><button class="td-btn">Delete</button></a></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+  <div th:replace="fragments :: header"></div>
+
+  <div class="content-table">
+    <table>
+      <thead>
+      <tr>
+        <th> Group Name </th>
+        <th class="add-btn"><a th:href="@{/admin/panel/groups/new}"><button>Add</button></a></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="${groups.empty}">
+        <td colspan="1"> Groups not found </td>
+      </tr>
+      <tr th:each="group : ${groups}">
+        <td><span th:text="${group.getName}"> Group Name </span></td>
+        <td class="btn"><button class="td-btn">Edit</button></td>
+        <td class="btn"><a th:href="@{/admin/panel/groups/delete?id={id}(id=${group.id})}"><button class="td-btn">Delete</button></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
 <footer>
   <div class="navbar">

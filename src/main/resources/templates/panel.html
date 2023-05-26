@@ -10,21 +10,9 @@
     <link rel="stylesheet" href="/css/panel.css" />
 </head>
     <body>
-        <div class="header-container">
-            <div class="logo">
-                <a href="/admin/panel"><img src="/images/logo.png"></a>
-            </div>
-            <ul class="header-list">
-                <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
-                <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
-                <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
-                <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
-                <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
-            </ul>
-        </div>
-        <!--DO: -->
-        <!--a horizontal list contains: -->
-        <!--users, study_groups, schedule -->
+
+        <div th:replace="fragments :: header"></div>
+
     </body>
 <script src="/js/script.js"></script>
 </html>

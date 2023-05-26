@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="header-container" th:fragment="header">
+        <div class="logo">
+            <a href="/admin/panel"><img src="/images/logo.png"></a>
+        </div>
+        <ul class="header-list">
+            <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
+            <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
+            <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
+            <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
+            <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
+        </ul>
+    </div>
+</body>
+</html>

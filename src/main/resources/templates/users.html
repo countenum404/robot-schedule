@@ -12,47 +12,35 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 </head>
 <body>
-<div class="header-container">
-    <div class="logo">
-        <a href="/admin/panel"><img src="/images/logo.png"></a>
-    </div>
-    <div>
-        <ul class="header-list">
-            <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
-            <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
-            <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
-            <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
-            <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
-        </ul>
-    </div>
-</div>
 
-<div class="content-table">
-    <table>
-        <thead>
-        <tr>
-            <th> Lastname </th>
-            <th> Firstname </th>
-            <th> Surname </th>
-            <th> Role </th>
-            <th class="add-btn"><a th:href="@{/admin/panel/users/new}"><button>Add</button></a></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${usersList.empty}">
-            <td colspan="4"> Users not found </td>
-        </tr>
-        <tr th:each="user : ${usersList}">
-            <td><span th:text="${user.lastname}"> Lastname </span></td>
-            <td><span th:text="${user.firstname}"> Firstname </span></td>
-            <td><span th:text="${user.surname}"> Surname </span></td>
-            <td><span th:text="${user.role}"> Role </span></td>
-            <td class="btn"><button class="td-btn">Edit</button></td>
-            <td class="btn"><a th:href="@{/admin/panel/users/delete?id={id}(id=${user.id})}"><button class="td-btn">Delete</button></a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div th:replace="fragments :: header"></div>
+
+    <div class="content-table">
+        <table>
+            <thead>
+            <tr>
+                <th> Lastname </th>
+                <th> Firstname </th>
+                <th> Surname </th>
+                <th> Role </th>
+                <th class="add-btn"><a th:href="@{/admin/panel/users/new}"><button>Add</button></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${usersList.empty}">
+                <td colspan="4"> Users not found </td>
+            </tr>
+            <tr th:each="user : ${usersList}">
+                <td><span th:text="${user.lastname}"> Lastname </span></td>
+                <td><span th:text="${user.firstname}"> Firstname </span></td>
+                <td><span th:text="${user.surname}"> Surname </span></td>
+                <td><span th:text="${user.role}"> Role </span></td>
+                <td class="btn"><button class="td-btn">Edit</button></td>
+                <td class="btn"><a th:href="@{/admin/panel/users/delete?id={id}(id=${user.id})}"><button class="td-btn">Delete</button></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 <footer>
     <div class="navbar">

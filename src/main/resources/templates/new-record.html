@@ -12,62 +12,52 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 </head>
 <body>
-<div class="header-container">
-    <div class="logo">
-        <a href="/admin/panel"><img src="/images/logo.png"></a>
-    </div>
-    <ul class="header-list">
-        <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
-        <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
-        <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
-        <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
-        <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
-    </ul>
-</div>
 
-<div class="container">
-    <div class="form">
-        <form action="#" method="post" th:action="@{/admin/panel/schedule/new}">
-            <div class="input">
-                <label for="teacher"><b>Teacher</b></label>
-                <select th:name="teacherId">
-                    <option name="teacher" th:each="teacher : ${teachers}" th:text="${teacher.firstname} + ' ' + ${teacher.lastname}" th:value="${teacher.id}"/>
-                </select>
-            </div>
-            <div class="input">
-                <label for="group"><b>Study Group</b></label>
-                <select th:name="group">
-                    <option name="group" th:each="group : ${groups}" th:text="${group.getName}" th:value="${group.getName}"/>
-                </select>
-            </div>
-            <div class="input">
-                <label for="subject"><b>Subjects</b></label>
-                <select th:name="subject">
-                    <option name="subject" th:each="subject : ${subjects}" th:text="${subject.getName}" th:value="${subject.getName}"/>
-                </select>
-            </div>
-            <div class="input">
-                <label for="day"><b>Day</b></label>
-                <select th:name="dayRange">
-                    <option  th:each="day : ${T(com.rshu.schedule.schedule.Day).values()}"
-                             th:value="${{day}}"
-                             th:text="${{day}}">
-                </select>
-            </div>
-            <div class="input">
-                <label for="subject"><b>Time</b></label>
-                <select th:name="timeRange">
-                    <option  th:each="time : ${T(com.rshu.schedule.schedule.TimeRange).values()}"
-                             th:value="${{time}}"
-                             th:text="${{time}}">
-                </select>
-            </div>
-            <div>
-                <button>Add Record</button>
-            </div>
-        </form>
+    <div th:replace="fragments :: header"></div>
+
+    <div class="container">
+        <div class="form">
+            <form action="#" method="post" th:action="@{/admin/panel/schedule/new}">
+                <div class="input">
+                    <label for="teacher"><b>Teacher</b></label>
+                    <select th:name="teacherId">
+                        <option name="teacher" th:each="teacher : ${teachers}" th:text="${teacher.firstname} + ' ' + ${teacher.lastname}" th:value="${teacher.id}"/>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="group"><b>Study Group</b></label>
+                    <select th:name="group">
+                        <option name="group" th:each="group : ${groups}" th:text="${group.getName}" th:value="${group.getName}"/>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="subject"><b>Subjects</b></label>
+                    <select th:name="subject">
+                        <option name="subject" th:each="subject : ${subjects}" th:text="${subject.getName}" th:value="${subject.getName}"/>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="day"><b>Day</b></label>
+                    <select th:name="dayRange">
+                        <option  th:each="day : ${T(com.rshu.schedule.schedule.Day).values()}"
+                                 th:value="${{day}}"
+                                 th:text="${{day}}">
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="subject"><b>Time</b></label>
+                    <select th:name="timeRange">
+                        <option  th:each="time : ${T(com.rshu.schedule.schedule.TimeRange).values()}"
+                                 th:value="${{time}}"
+                                 th:text="${{time}}">
+                    </select>
+                </div>
+                <div>
+                    <button>Add Record</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
 <footer>
     <div class="navbar">

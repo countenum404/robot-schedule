@@ -12,42 +12,32 @@
     <link rel="stylesheet" href="/css/navbar.css" />
 </head>
 <body>
-<div class="header-container">
-    <div class="logo">
-        <a href="/admin/panel"><img src="/images/logo.png"></a>
-    </div>
-    <ul class="header-list">
-        <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
-        <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
-        <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
-        <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
-        <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
-    </ul>
-</div>
 
-<div class="content-table">
-    <table>
-        <thead>
-        <tr>
-            <th> Study Group </th>
-            <th> Teacher </th>
-            <th> Subject </th>
-            <th> Time </th>
-            <th class="add-btn"><a th:href="@{/admin/panel/schedule/new}"><button>Add</button></a></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${records.empty}">
-            <td colspan="4"> Records not found </td>
-        </tr>
-        <tr th:each="record : ${records}">
-            <td><span th:text="${record.group}"> Study Group </span></td>
-            <td><span th:text="${record.teacher.lastname}"> Teacher </span></td>
-            <td><span th:text="${record.subject}"> Subject </span></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div th:replace="fragments :: header"></div>
+
+    <div class="content-table">
+        <table>
+            <thead>
+            <tr>
+                <th> Study Group </th>
+                <th> Teacher </th>
+                <th> Subject </th>
+                <th> Time </th>
+                <th class="add-btn"><a th:href="@{/admin/panel/schedule/new}"><button>Add</button></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${records.empty}">
+                <td colspan="4"> Records not found </td>
+            </tr>
+            <tr th:each="record : ${records}">
+                <td><span th:text="${record.group}"> Study Group </span></td>
+                <td><span th:text="${record.teacher.lastname}"> Teacher </span></td>
+                <td><span th:text="${record.subject}"> Subject </span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 <footer>
     <div class="navbar">
