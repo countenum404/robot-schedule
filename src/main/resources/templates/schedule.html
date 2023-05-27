@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <div th:replace="fragments :: header"></div>
+    <div th:replace="~{fragments :: header}"></div>
 
     <div class="content-table">
         <table>
@@ -22,7 +22,7 @@
                 <th> Study Group </th>
                 <th> Teacher </th>
                 <th> Subject </th>
-                <th> Time </th>
+                <th> When </th>
                 <th class="add-btn"><a th:href="@{/admin/panel/schedule/new}"><button>Add</button></a></th>
             </tr>
             </thead>
@@ -34,6 +34,7 @@
                 <td><span th:text="${record.group}"> Study Group </span></td>
                 <td><span th:text="${record.teacher.lastname}"> Teacher </span></td>
                 <td><span th:text="${record.subject}"> Subject </span></td>
+                <td><span th:text="|${record.dayRange} time: ${record.timeRange}|"> When </span></td>
             </tr>
             </tbody>
         </table>

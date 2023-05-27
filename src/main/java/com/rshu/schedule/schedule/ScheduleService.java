@@ -40,6 +40,8 @@ public class ScheduleService {
                                             .build())
                                     .group(scheduleRecord.getStudyGroups().get(0).getName())
                                     .subject(scheduleRecord.getSubject().get(0).getName())
+                                    .timeRange(scheduleRecord.getTimeOfDay())
+                                    .dayRange(scheduleRecord.getDayOfWeek())
                                     .build();
                         }
                 )
