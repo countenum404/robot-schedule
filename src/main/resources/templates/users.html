@@ -42,15 +42,7 @@
         </table>
     </div>
 
-<footer>
-    <div class="navbar">
-        <ul class="pagination" th:if="${usersList.totalPages > 0}">
-            <li th:each="pageNumber : ${#numbers.sequence(0, usersList.totalPages - 1)}">
-                <a th:text="${pageNumber + 1}"  th:href="@{/admin/panel/users(size=1, page=${pageNumber})}" th:class="${pageNumber==usersList.number} ? active"></a>
-            </li>
-        </ul>
-    </div>
-</footer>
+    <div th:replace="~{fragments :: footer(pageable=${usersList}, res='users')}"></div>
 
 </body>
     <script src="/js/script.js"></script>

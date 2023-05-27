@@ -17,5 +17,18 @@
             <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
         </ul>
     </div>
+
+    <div th:fragment="footer">
+        <footer>
+            <div class="navbar">
+                <ul class="pagination" th:if="${pageable}">
+                    <li th:each="pageNumber : ${#numbers.sequence(0, pageable.totalPages - 1)}" th:if="${pageable.totalPages > 0}">
+                        <a th:text="${pageNumber + 1}"  th:href="@{/admin/panel/${res}(size=1, page=${pageNumber})}" th:class="${pageNumber==pageable.number} ? active"></a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
 </body>
 </html>

@@ -12,20 +12,8 @@
   <link rel="stylesheet" href="/css/navbar.css" />
 </head>
 <body>
-<div class="header-container">
-  <div class="logo">
-    <a href="/admin/panel"><img src="/images/logo.png"></a>
-  </div>
-  <div>
-    <ul class="header-list">
-      <li class="header-item"><a class="lia" href="/admin/panel/schedule">Schedule</a></li>
-      <li class="header-item"><a class="lia" href="/admin/panel/users">Users</a></li>
-      <li class="header-item"><a class="lia" href="/admin/panel/groups">Study groups</a></li>
-      <li class="header-item"><a class="lia" href="/admin/panel/subjects">Subjects</a></li>
-      <li class="header-item"><a class="lia" href="/admin/panel/about">About</a></li>
-    </ul>
-  </div>
-</div>
+
+  <div th:replace="~{fragments :: header}"></div>
 
 <div class="text">
   <p>В довоенные тридцатые годы прошлого века время было отнюдь не лёгким и
@@ -853,15 +841,7 @@
 </div>
 </div>
 
-<footer>
-  <div class="navbar">
-    <!-- <ul class="pagination" th:if="${usersList.totalPages > 0}">
-      <li th:each="pageNumber : ${#numbers.sequence(0, usersList.totalPages - 1)}">
-        <a th:text="${pageNumber + 1}"  th:href="@{/admin/panel/users(size=1, page=${pageNumber})}"/>
-      </li>
-    </ul> -->
-  </div>
-</footer>
+ <div th:replace="~{fragments :: footer}"></div>
 
 </body>
   <script src="/js/script.js"></script>
