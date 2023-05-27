@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.thymeleaf.exceptions.TemplateProcessingException;
 import org.thymeleaf.templateparser.text.TextTemplateParser;
 
 @Controller
@@ -28,16 +29,24 @@ public class ScheduleAdminController {
 
     @GetMapping
     public String getSchedulePage(Model model) {
-        model.addAttribute("records", scheduleService.allRecords());
+        try {
+            model.addAttribute("records", scheduleService.allRecords());
+        } catch (TemplateProcessingException tex) {
+            tex.printStackTrace();
+        }
         return "schedule";
     }
 
     @GetMapping("/new")
     public String getNewRecordPage(Model model) {
-        model.addAttribute("teachers", teacherService.getAllTeachers());
-        model.addAttribute("groups", studentsAndGroupService.getGroups());
-        model.addAttribute("subjects", subjectService.getAllSubjects());
-        model.addAttribute("records", scheduleService.allRecords());
+        try {
+            model.addAttribute("teachers", teacherService.getAllTeachers());
+            model.addAttribute("groups", studentsAndGroupService.getGroups());
+            model.addAttribute("subjects", subjectService.getAllSubjects());
+            model.addAttribute("records", scheduleService.allRecords());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return "new-record";
     }
 

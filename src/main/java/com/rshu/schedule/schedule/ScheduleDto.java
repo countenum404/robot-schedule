@@ -26,6 +26,8 @@ public class ScheduleDto {
                 ", teacher=" + teacher +
                 ", group='" + group + '\'' +
                 ", subject='" + subject + '\'' +
+                ", timeRange=" + timeRange +
+                ", dayRange=" + dayRange +
                 '}';
     }
 }
