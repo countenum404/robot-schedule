@@ -63,7 +63,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 userDetails = this.userDetailsService.loadUserByUsername(userLogin);
             } catch (UsernameNotFoundException exception) {
-                filterServiceErrorHandler.handleUsernameNotFoundException(response);
+                filterServiceErrorHandler.handleUsernameNotFoundException(request, response);
                 return;
             }
             var isTokenValid = tokenRepository.findByToken(jwt)
