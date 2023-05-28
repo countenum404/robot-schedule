@@ -50,8 +50,12 @@ public class FilterServiceErrorHandler {
         }
     }
 
-    public void handleUsernameNotFoundException(HttpServletResponse response) throws IOException {
-        setResponseContent(response);
-        response.getWriter().write(objectMapper.writeValueAsString("Credentials is not found"));
+    public void handleUsernameNotFoundException(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (new AntPathMatcher().match("/api/**", request.getRequestURI())) {
+            setResponseContent(response);
+            response.getWriter().write(objectMapper.writeValueAsString("Credentials is not found"));
+        } else {
+            response.sendRedirect("/admin/login");
+        }
     }
 }
